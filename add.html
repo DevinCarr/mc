@@ -24,7 +24,9 @@
               </label>
               <label>Value: <input type="number" name="Value" placeholder="10">
               </label>
-              <label>Completed: <input type="checkbox" name="Completed">
+              <label for="completedTrue">Yes: <input type="radio" id="completedTrue" name="Completed" value="true">
+              </label>
+              <label for="completedFalse">No: <input type="radio" id="completedFalse" name="Completed" value="false">
               </label>
             </fieldset>
           </form>
@@ -32,6 +34,9 @@
             <button class="button" id="submitButton" href="#">Submit</button>
           </div>
          </div>
+      </div>
+      <div class="row" >
+        <h3 id="statusText" style="display:none"></h3>
       </div>
     </div>
   </body>

@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   var addForm = document.getElementById('addForm'),
-      submitButton = document.getElementById('submitButton');
+      submitButton = document.getElementById('submitButton'),
+      statusText = document.getElementById('statusText');
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyACPLnIHH01PDQQ8i9oClM86uhFOVCSZKg",
@@ -34,20 +35,27 @@
     console.log(error);
     // ...
   });
+
+  let displayStatus = text => {
+    statusText.innerHTML = text;
+    statusText.style.display = 'block';
+  };
   
   submitButton.addEventListener('click', event => {
+    statusText.style.display = 'none';
     let title = addForm.elements['Title'].value;
     let newGoal = {
       completed: addForm.elements['Completed'].value,
       value: addForm.elements['Value'].value
     };
+    console.log(newGoal.completed);
     if (title === '' || newGoal.value < 0) {
-      console.log('Invalid form');
+      displayStatus('Invalid form');
     } else {
       firebase.database().ref('goals/' + title).set(newGoal).then(result =>{
-        console.log('Sucess');
+        displayStatus('Success');
       }).catch(error => {
-        console.log(error);
+        displayStatus('Error: ' + error.message);
       });
     }
   });
